@@ -256,175 +256,176 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
-    const catGif = document.getElementById('cat-gif'),
-          question = document.getElementById('question'),
-          buttons = document.getElementById('buttons'),
-          response = document.getElementById('response');
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const catGif = document.getElementById('cat-gif'),
+        question = document.getElementById('question'),
+        buttons = document.getElementById('buttons'),
+        response = document.getElementById('response');
 
-    const sadMessages = ["bkt hnd 😢", "longkot 💔", "lombay 😞", "pighati 😿"];
+  const sadMessages = ["bkt hnd 😢", "longkot 💔", "lombay 😞", "pighati 😿"];
 
-    function randomSadFloatingMessage() {
-      const msg = document.createElement("div");
-      msg.className = "sad-floating";
-      msg.textContent = sadMessages[Math.floor(Math.random() * sadMessages.length)];
+  function randomSadFloatingMessage() {
+    const msg = document.createElement("div");
+    msg.className = "sad-floating";
+    msg.textContent = sadMessages[Math.floor(Math.random() * sadMessages.length)];
 
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      const angle = (Math.random() * 90) - 45;
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    const angle = (Math.random() * 90) - 45;
 
-      msg.style.left = `${x}px`;
-      msg.style.top = `${y}px`;
-      msg.style.transform = `rotate(${angle}deg)`;
+    msg.style.left = `${x}px`;
+    msg.style.top = `${y}px`;
+    msg.style.transform = `rotate(${angle}deg)`;
 
-      document.body.appendChild(msg);
-      setTimeout(() => document.body.removeChild(msg), 2500);
-    }
+    document.body.appendChild(msg);
+    setTimeout(() => document.body.removeChild(msg), 2500);
+  }
 
-    function launchConfetti() {
-      const duration = 3 * 1000;
-      const end = Date.now() + duration;
+  function launchConfetti() {
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
 
-      (function frame() {
-        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff6b81', '#ff4757', '#feca57'] });
-        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#70a1ff', '#7bed9f', '#eccc68'] });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
-    }
+    (function frame() {
+      confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff6b81', '#ff4757', '#feca57'] });
+      confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#70a1ff', '#7bed9f', '#eccc68'] });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
 
-    const happyCats = ["happy1.gif", "happy2.gif"];
-    const sadCats = ["sad1.gif", "sad2.gif"];
-    const nervousCat = "nervous1.gif";
-    const nervous2Cat = "nervous2.gif";
-    const beggingCat = "begging1.gif";
-    const marriedCat = "wedding1.gif";
+  const happyCats = ["happy1.gif", "happy2.gif"];
+  const sadCats = ["sad1.gif", "sad2.gif"];
+  const nervousCat = "nervous1.gif";
+  const nervous2Cat = "nervous2.gif";
+  const beggingCat = "begging1.gif";
+  const marriedCat = "wedding1.gif";
 
-    function randGif(arr) {
-      return arr[Math.floor(Math.random() * arr.length)] + "?v=" + Math.random();
-    }
+  function randGif(arr) {
+    return arr[Math.floor(Math.random() * arr.length)] + "?v=" + Math.random();
+  }
 
-    function changeGif(url) {
-      catGif.src = url;
-    }
+  function changeGif(url) {
+    catGif.src = url;
+  }
 
-    function moveButton(btn) {
-      btn.style.position = 'absolute';
-      btn.style.left = (Math.random() * (window.innerWidth - 150)) + 'px';
-      btn.style.top = (Math.random() * (window.innerHeight - 150)) + 'px';
-    }
+  function moveButton(btn) {
+    btn.style.position = 'absolute';
+    btn.style.left = (Math.random() * (window.innerWidth - 150)) + 'px';
+    btn.style.top = (Math.random() * (window.innerHeight - 150)) + 'px';
+  }
 
-    function Q1() {
-      const yes = document.getElementById('yes'),
-            no = document.getElementById('no');
+  function Q1() {
+    const yes = document.getElementById('yes'),
+          no = document.getElementById('no');
 
-      yes.onclick = () => {
-        question.textContent = "hehe r u ready for another question?? ";
-        changeGif(nervousCat);
-        buttons.innerHTML = `<button class="yes" id="yes2">Yes</button><button class="no" id="no2">No</button>`;
-        Q2();
+    yes.onclick = () => {
+      question.textContent = "hehe r u ready for another question?? ";
+      changeGif(nervousCat);
+      buttons.innerHTML = `<button class="yes" id="yes2">Yes</button><button class="no" id="no2">No</button>`;
+      Q2();
+    };
+
+    no.onmouseover = () => {
+      if (!("ontouchstart" in window)) {
+        moveButton(no);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
+
+    no.onclick = () => {
+      if ("ontouchstart" in window) {
+        moveButton(no);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
+  }
+
+  function Q2() {
+    const yes2 = document.getElementById('yes2'),
+          no2 = document.getElementById('no2');
+
+    yes2.onclick = () => {
+      let c = 10;
+      question.textContent = `Okay... give me ${c} seconds 😅`;
+      changeGif(nervous2Cat);
+      buttons.innerHTML = "";
+      const iv = setInterval(() => {
+        c--;
+        if (c > 0) {
+          question.textContent = `Okay... give me ${c} seconds 😅`;
+        } else {
+          clearInterval(iv);
+          showFinal();
+        }
+      }, 1000);
+    };
+
+    no2.onmouseover = () => {
+      if (!("ontouchstart" in window)) {
+        moveButton(no2);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
+
+    no2.onclick = () => {
+      if ("ontouchstart" in window) {
+        moveButton(no2);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
+  }
+
+  function showFinal() {
+    question.textContent = "Will you be my girlfriend, again? :>>";
+    changeGif(beggingCat);
+    buttons.innerHTML = `<button class="yes" id="yes3">Yes</button><button class="no" id="no3">No</button>`;
+    Q3();
+  }
+
+  function Q3() {
+    const yes3 = document.getElementById('yes3'),
+          no3 = document.getElementById('no3');
+
+    yes3.onclick = () => {
+      response.style.display = 'block';
+      changeGif(marriedCat);
+      launchConfetti();
+      buttons.innerHTML = "";
+
+      const container = document.getElementById("envelope-container");
+      const envelope = document.getElementById("envelope");
+
+      container.style.display = "block";
+      container.style.bottom = "80px";
+
+      envelope.onclick = () => {
+        envelope.classList.toggle("open");
       };
+    };
 
-      no.onmouseover = () => {
-  if (!("ontouchstart" in window)) {
-    moveButton(no);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
+    no3.onmouseover = () => {
+      if (!("ontouchstart" in window)) {
+        moveButton(no3);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
+
+    no3.onclick = () => {
+      if ("ontouchstart" in window) {
+        moveButton(no3);
+        changeGif(randGif(sadCats));
+        randomSadFloatingMessage();
+      }
+    };
   }
-};
 
-no.onclick = () => {
-  if ("ontouchstart" in window) {
-    moveButton(no);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
-  }
-};
-      
+  Q1();
+</script>
 
-    function Q2() {
-      const yes2 = document.getElementById('yes2'),
-            no2 = document.getElementById('no2');
-
-      yes2.onclick = () => {
-        let c = 10;
-        question.textContent = `Okay... give me ${c} seconds 😅`;
-        changeGif(nervous2Cat);
-        buttons.innerHTML = "";
-        const iv = setInterval(() => {
-          c--;
-          if (c > 0) {
-            question.textContent = `Okay... give me ${c} seconds 😅`;
-          } else {
-            clearInterval(iv);
-            showFinal();
-          }
-        }, 1000);
-      };
-
-      no2.onmouseover = () => {
-  if (!("ontouchstart" in window)) {
-    moveButton(no2);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
-  }
-};
-
-no2.onclick = () => {
-  if ("ontouchstart" in window) {
-    moveButton(no2);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
-  }
-};
-
-
-    function showFinal() {
-      question.textContent = "Will you be my girlfriend, again? :>>";
-      changeGif(beggingCat);
-      buttons.innerHTML = `<button class="yes" id="yes3">Yes</button><button class="no" id="no3">No</button>`;
-      Q3();
-    }
-
-    function Q3() {
-      const yes3 = document.getElementById('yes3'),
-            no3 = document.getElementById('no3');
-
-      yes3.onclick = () => {
-        response.style.display = 'block';
-        changeGif(marriedCat);
-        launchConfetti();
-        buttons.innerHTML = "";
-
-        const container = document.getElementById("envelope-container");
-        const envelope = document.getElementById("envelope");
-
-        container.style.display = "block";
-        container.style.bottom = "80px";
-
-        envelope.onclick = () => {
-          envelope.classList.toggle("open");
-        };
-      };
-
-      no3.onmouseover = () => {
-  if (!("ontouchstart" in window)) {
-    moveButton(no3);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
-  }
-};
-
-no3.onclick = () => {
-  if ("ontouchstart" in window) {
-    moveButton(no3);
-    changeGif(randGif(sadCats));
-    randomSadFloatingMessage();
-  }
-};
-    }}}
-
-    Q1();
-  </script>
 </body>
 </html>
