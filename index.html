@@ -282,13 +282,21 @@
       };
 
       no.onmouseover = () => {
-        moveButton(no);
-        changeGif(randGif(sadCats));
-        randomSadFloatingMessage();
-      };
+  if (!("ontouchstart" in window)) {
+    moveButton(no);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
 
-      no.onmouseleave = () => changeGif(randGif(sadCats));
-    }
+no.onclick = () => {
+  if ("ontouchstart" in window) {
+    moveButton(no);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
+      
 
     function Q2() {
       const yes2 = document.getElementById('yes2'),
@@ -311,13 +319,21 @@
       };
 
       no2.onmouseover = () => {
-        moveButton(no2);
-        changeGif(randGif(sadCats));
-        randomSadFloatingMessage();
-      };
+  if (!("ontouchstart" in window)) {
+    moveButton(no2);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
 
-      no2.onmouseleave = () => changeGif(randGif(sadCats));
-    }
+no2.onclick = () => {
+  if ("ontouchstart" in window) {
+    moveButton(no2);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
+
 
     function showFinal() {
       question.textContent = "Will you be my girlfriend, again? :>>";
@@ -348,13 +364,21 @@
       };
 
       no3.onmouseover = () => {
-        moveButton(no3);
-        changeGif(randGif(sadCats));
-        randomSadFloatingMessage();
-      };
+  if (!("ontouchstart" in window)) {
+    moveButton(no3);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
 
-      no3.onmouseleave = () => changeGif(randGif(sadCats));
-    }
+no3.onclick = () => {
+  if ("ontouchstart" in window) {
+    moveButton(no3);
+    changeGif(randGif(sadCats));
+    randomSadFloatingMessage();
+  }
+};
+
 
     Q1();
   </script>
