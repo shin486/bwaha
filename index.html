@@ -348,13 +348,13 @@
 
     yes2.onclick = () => {
       let c = 10;
-      question.textContent = `Okay... give me ${c} seconds 😅`;
+      question.textContent = `k gib me ${c} seconds 😅`;
       changeGif(nervous2Cat);
       buttons.innerHTML = "";
       const iv = setInterval(() => {
         c--;
         if (c > 0) {
-          question.textContent = `Okay... give me ${c} seconds 😅`;
+          question.textContent = `k gib me ${c} seconds 😅`;
         } else {
           clearInterval(iv);
           showFinal();
@@ -391,21 +391,24 @@
           no3 = document.getElementById('no3');
 
     yes3.onclick = () => {
-      response.style.display = 'block';
-      changeGif(marriedCat);
-      launchConfetti();
-      buttons.innerHTML = "";
+  response.style.display = 'block';
+  changeGif(marriedCat);
+  launchConfetti();
+  buttons.innerHTML = "";
+  question.textContent = "YAY KASAL NA TAYO 💍";
+  // 🔊 Play the wedding sound
+  document.getElementById("weddingSound").play();
 
-      const container = document.getElementById("envelope-container");
-      const envelope = document.getElementById("envelope");
+  const container = document.getElementById("envelope-container");
+  const envelope = document.getElementById("envelope");
 
-      container.style.display = "block";
-      container.style.bottom = "80px";
+  container.style.display = "block";
+  container.style.bottom = "80px";
 
-      envelope.onclick = () => {
-        envelope.classList.toggle("open");
-      };
-    };
+  envelope.onclick = () => {
+    envelope.classList.toggle("open");
+  };
+};
 
     no3.onmouseover = () => {
       if (!("ontouchstart" in window)) {
@@ -426,6 +429,8 @@
 
   Q1();
 </script>
+<audio id="weddingSound" src="wedding.mp3"></audio>
+
 
 </body>
 </html>
